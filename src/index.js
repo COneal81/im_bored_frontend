@@ -51,9 +51,21 @@ function postFetchActivity(title, description, category_id) {
         })
         .then(response => response.json())
         .then(activity => {
-            console.log(activity);
+            const activityData = activity.data.attributes
+            renderActivities(activityData)
     })
     
 }
+function renderActivities(activities) {
+    let allActivities = 
+    `<div data-id= ${activities.id}>
+    <h2>${activities.title}</h2>
+    <p>${activities.description}</p>
+    <p>Category: ${activities.category.category_name}</p>
+    <button data-id=${activities.id}> Edit </button>
+    </div>
+    <br><br>`
 
+    document.querySelector("#activities_container").innerHTML +=allActivities;
+}
 
