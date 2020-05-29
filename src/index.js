@@ -5,14 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const createActivityForm = document.querySelector('#create-activity-form')
 
-    createActivityForm.addEventListener("submit", (e) =>
-    createFormHandler(e))
+    createActivityForm.addEventListener("submit", (e) => createFormHandler(e))
 })
 
 // This from handler is what grabs all of that value from the submitting of a form.
-
-
-
 
 function getActivities() {
     fetch(endFetchPoint)
@@ -31,19 +27,33 @@ function getActivities() {
 
             document.querySelector("#activities_container").innerHTML +=allActivities
         })
-    })
-        
-    function createFormHandler(e) {
-        e.preventDefault()
-        const titleInput = document.querySelector("#input-title").value
-        const descriptionInput = document.querySelector("#input-description").value
-        const categoryInput = parseInt(document.querySelector("#categories").value)
-        postFetch(titleInput, descriptionInput, categoryInput)
-    }
-    
-    function postFetch(titleInput, descriptionInput, category_id) {
-        console.log(titleInput, descriptionInput, category_id)
-    }
+    })    
 }
 
+
+
+function createFormHandler(e) {
+    e.preventDefault()
+    const titleInput = document.querySelector("#input-title").value
+    const descriptionInput = document.querySelector("#input-description").value
+    const categoryId = parseInt(document.querySelector("#categories").value)
+    postFetchActivity(titleInput, descriptionInput, categoryId)
+}
+
+
+function postFetchActivity(title, description, category_id) {
+    // console.log(title, description, category_id);
+    const activityFormData = {title, description, category_id}
+    fetch(endFetchPoint, {
+        method: "POST", 
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(activityFormData)
+        })
+        .then(response => response.json())
+        .then(activity => {
+            console.log(activity);
+    })
     
+}
+
+
