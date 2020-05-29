@@ -17,6 +17,37 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <h2>Welcome to Mom, I'm Bored... where moms can find activities for their kids!!!!</h2>
+        <div class="activity-form-container">
+            <form id="create-activity-form" style="">
+                <h4>Add an activity</h4>
+               <label for="title">Activity Name:</label>
+               <input id="input-title" type="text" name="title" value ="" placeholder="Activity Name..."><br><br>
+            
+               <label for="description">Description:</label>
+               <textarea id="input-description" name="description" rows="2" cols="55"
+                   value="" placeholder="Describe activity..." name="" id="" ></textarea><br><br>
+
+               <h5>Select All Categories that Apply </h5>
+               <select id="categories" name="categories">
+                    <option value="1">Winter</option>
+                    <option value="2">Spring</option>
+                    <option value="3">Summer</option>
+                    <option value="4">Winter</option>
+                    <option value="5">Indoor</option>
+                    <option value="6">Outdoor</option>
+                  </select>
+                  <br><br>
+               <!-- <label for="summer">Summer:</label> -->
+               <!-- <input id="summer" type="checkbox" name="summer" value =""><br><br> -->
+               <!-- Later change this to bring in all categories -->
+
+                <input id= "create-button" type="submit" name="submit" value="Create Activity"><br><br>
+            </form>
+        </div>
+        <br><br>
         <div id="activities_container"> </div>
     </body>
 </html>
+
+
+
