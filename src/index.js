@@ -17,7 +17,8 @@ function getActivities() {
         activities.data.forEach(activities => {
         //    debugger
             let newActivity = new Activity(activities, activities.attributes)
-            renderActivities(activities)
+
+            document.querySelector("#activities_container").innerHTML += newActivity.renderActivities()
         })
     })    
 }
@@ -43,20 +44,12 @@ function postFetchActivity(title, description, category_id) {
         .then(response => response.json())
         .then(activity => {
             const activityData = activity.data
-            renderActivities(activityData)
+            let newActivity = new Activity(activityData, activityData.attributes)
+
+            document.querySelector("#activities_container").innerHTML += newActivity.renderActivities()
+          
     })
     
 }
-function renderActivities(activities) {
-    const allActivities = 
-    `<div data-id= ${activities.id}>
-    <h2>${activities.attributes.title}</h2>
-    <p>${activities.attributes.description}</p>
-    <p>Category: ${activities.attributes.category.category_name}</p>
-    <button data-id=${activities.attributes.id}> Edit </button>
-    </div>
-    <br><br>`
 
-    document.querySelector("#activities_container").innerHTML += allActivities;
-}
 
