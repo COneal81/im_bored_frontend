@@ -40,7 +40,7 @@ function postFetchActivity(title, description, category_id) {
         })
         .then(response => response.json())
         .then(activity => {
-            const activityData = activity.data.attributes
+            const activityData = activity.data
             renderActivities(activityData)
     })
     
