@@ -15,6 +15,8 @@ function getActivities() {
     .then(response => response.json())
     .then(activities => {
         activities.data.forEach(activities => {
+        //    debugger
+            let newActivity = new Activity(activities, activities.attributes)
             renderActivities(activities)
         })
     })    
