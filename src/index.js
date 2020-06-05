@@ -19,32 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
      document.querySelector('#update-activity').addEventListener('submit', e => updateActivityFormHandler(e))
 })
 
-function updateActivityFormHandler(e) {
-    e.preventDefault();
-   
-    const id = parseInt(e.target.dataset.id);
-    const activity = Activity.findById(id);
-    const title = e.target.querySelector("#input-title").value
-    const description= e.target.querySelector("#input-description").value
-    const category_id = parseInt(e.target.querySelector("#categories").value)
-    //  debugger
-    patchFetchActivity(activity, title, description, category_id)
-}
 
-function patchFetchActivity(activity, title, description, category_id){
-    const bodyJSONData = {title, description, category_id}
-    fetch(`http://localhost:3000/api/v1/activities/${activity.id}`, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-        },
-        body: JSON.stringify(bodyJSONData),
-    })
-    .then(response => response.json())
-    .then(updatedActivity => console.log(updatedActivity))
     
-}
+
 // This from handler is what grabs all of that value from the submitting of a form.
 
 function getActivities() {
@@ -53,7 +30,7 @@ function getActivities() {
     .then(activities => {
         activities.data.forEach(activities => {
             // debugger
-            const newActivity = new Activity(activities.id, activities.attributes)
+            let newActivity = new Activity(activities.id, activities.attributes)
 
             document.querySelector("#activities_container").innerHTML += newActivity.renderActivities()
         })
@@ -70,6 +47,36 @@ function createFormHandler(e) {
 }
 
 
+function updateActivityFormHandler(e) {
+    e.preventDefault();
+    const id = parseInt(e.target.dataset.id);
+    const activity = Activity.findById(id);
+    const title = e.target.querySelector("#input-title").value
+    const description= e.target.querySelector("#input-description").value
+    const category_id = parseInt(e.target.querySelector("#categories").value)
+    //  debugger
+    patchFetchActivity(activity, title, description, category_id)
+}
+
+
+function patchFetchActivity(activity, title, description, category_id){
+    const bodyJSONData = {title, description, category_id}
+    fetch(`http://localhost:3000/api/v1/activities/${activity.id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+        },
+        body: JSON.stringify(bodyJSONData),
+    })
+    
+    .then(response => response.json())
+    .then(activity => {
+        const updateActivity = new Activity(activity.data.id, activity.data.attributes)
+     document.querySelector('#activities_container').innerHTML += updateActivity.renderActivities()
+     });
+}
+    
 function postFetchActivity(title, description, category_id) {
     // console.log(title, description, category_id);
     const activityFormData = {title, description, category_id}
@@ -81,16 +88,11 @@ function postFetchActivity(title, description, category_id) {
         .then(response => response.json())
         .then(activity => {
             //  const activityData = activity.data
-            const newActivity = new Activity(activity.data.id, activity.data.attributes)
+            let newActivity = new Activity(id, activitiesAttributes)
 
-            document.querySelector("#activities_container").innerHTML += newActivity.renderActivities()
+            document.querySelector('#activities_container').innerHTML += newActivity.renderActivities();
           
     })
-    
-
-    
-    
-
     
 }
 
