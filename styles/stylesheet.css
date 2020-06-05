@@ -1,0 +1,31 @@
+
+* {
+    font-family:'Courier New', Courier, monospace;
+    color: #050505;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    margin: 0 auto;
+    background: #f3f8fd;
+    /* background: -webkit-linear-gradient(#f3f8fd, #27bb02); */
+    background-attachment: fixed
+}
+
+
+h2 {
+    
+}
+#activities_container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 7px;
+    max-width: 500px;
+    
+}
+
