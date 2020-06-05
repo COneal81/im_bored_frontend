@@ -10,22 +10,48 @@ body {
 }
 
 body {
+    
+    
     width: 100%;
     margin: 0 auto;
     background: #f3f8fd;
-    /* background: -webkit-linear-gradient(#f3f8fd, #27bb02); */
+    background: -webkit-linear-gradient(#f3f8fd, #a9e4f3);
     background-attachment: fixed
 }
 
+/* div {
+    text-align: center
+} */
 
 h2 {
     
 }
+.activity-form-container {
+    border: 1px solid rgb(3, 18, 85);
+    text-align: center
+}
+
+
 #activities_container {
     display: grid;
+    border-top: 5px, solid #050505; 
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 7px;
     max-width: 500px;
-    
+    font-size: 16px;
+    text-align: left
 }
 
+p {
+    font-display: bold
+    }
+
+#update-activity{
+ border: 1px solid rgb(3, 18, 85);
+ text-align: center
+}
+
+#activities_container{
+    color: #050505;
+    
+}
