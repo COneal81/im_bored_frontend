@@ -15,9 +15,9 @@ class Activity {
         //  debugger
         return `
             <div data-id= ${this.id}>
-                <h2>${this.title}</h2>
-                <p>${this.description}</p>
-                <p>Category: ${this.category.category_name}</p>
+                <h2> ${this.title}</h2>
+                <p><strong>Description:</strong> ${this.description}</p>
+                <p><strong>Category:</strong> ${this.category.category_name}</p>
                 <button data-id=${this.id}> Edit </button>
             </div>
             <br><br>`;
@@ -36,15 +36,15 @@ class Activity {
         <form data-id=${this.id}>
         <h4> Update Activity </h4>
 
-        <label> Title: </label>
+        <label><strong> Title: </strong></label>
         <input id='input-title' type='text' name='title' value='${this.title}' class='input-text'>
         <br><br>
 
-        <label> Description: </label>
+        <label><strong> Description: </strong></label>
         <textarea id="input-description" name="description" rows="2" cols="55"
                    value="">${this.description} </textarea><br><br>
         
-        <label> Select a Category </label>
+        <label> <strong>Select a Category </strong></label>
         <select id='categories' name='categories' value='${this.category.category_name}'>
             <option value="1">Winter</option>
             <option value="2">Spring</option>
@@ -56,7 +56,7 @@ class Activity {
         <br><br>
         
         <input id='edit-button' type='submit' name='submit' value='Update ${this.title}' class='submit'>
-
+        <br><br>
         </form>
        `;
     }

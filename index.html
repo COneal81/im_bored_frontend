@@ -3,37 +3,43 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Mom, I'm Bored!</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href=''>
+        <link rel="stylesheet" href='styles/stylesheet.css'>
         <script type="text/javascript" src="src/activities.js"></script>
         <script type="text/javascript" src="src/index.js"></script>
+        
     </head>
+
+
     <body>
+            
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <h2>Welcome to Mom, I'm Bored... where moms can find activities for their kids!!!!</h2>
-        <div class="activity-form-container">
-            <form id="create-activity-form" style="">
-                <h4>Add an activity</h4>
-               <label for="title">Activity Name:</label>
+        <h1>Mom, I'm Bored... </h1>
+            <h4>...where moms can find activities for their kids!!!!</h4><br></br>
+            <div class="activity-form-container">
+                    <form id="create-activity-form" style="">
+                <h3>Add an activity</h3>
+               <label for="title"><strong>Activity Name:</strong></strong></label>
                <input id="input-title" type="text" name="title" value ="" placeholder="Activity Name..."><br><br>
             
-               <label for="description">Description:</label>
+               <label for="description"><strong>Description:</strong></label>
                <textarea id="input-description" name="description" rows="2" cols="55"
                    value="" placeholder="Describe activity..." name="" id="" ></textarea><br><br>
 
-               <h5>Select All Categories that Apply </h5>
+               <h5><strong>Select Category</strong> </h5>
                <select id="categories" name="categories">
                     <option value="1">Winter</option>
                     <option value="2">Spring</option>
                     <option value="3">Summer</option>
-                    <option value="4">Winter</option>
+                    <option value="4">Fall</option>
                     <option value="5">Indoor</option>
                     <option value="6">Outdoor</option>
                   </select>
@@ -48,13 +54,20 @@
         </div>
         <br><br>
         <div id="update-activity"></div>
-        <br><br>
-        <div id="activities_container"> </div>
+        <br><br><br>
+        <h2><center>~~ Activities List ~~</center></h2>
+        <br>
+        <div id="activities_container"> 
+                
+        </div>
+        
+                
         <br><br>
         
        
 
     </body>
+
 </html>
 
 

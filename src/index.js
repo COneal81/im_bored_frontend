@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-    
 
 // This from handler is what grabs all of that value from the submitting of a form.
 
@@ -46,6 +45,25 @@ function createFormHandler(e) {
     postFetchActivity(titleInput, descriptionInput, categoryId)
 }
 
+function postFetchActivity(title, description, category_id) {
+    // console.log(title, description, category_id);
+    const activityFormData = {title, description, category_id}
+    fetch(endFetchPoint, {
+        method: "POST", 
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(activityFormData)
+        })
+        .then(response => response.json())
+        .then(activity => {
+        //    debugger
+            const updatedActivity = new Activity(activity.id, activity.data.attributes)
+
+            document.querySelector('#activities_container').innerHTML += updatedActivity.renderActivities();
+          
+    })
+    
+    
+}
 
 function updateActivityFormHandler(e) {
     e.preventDefault();
@@ -77,23 +95,7 @@ function patchFetchActivity(activity, title, description, category_id){
      });
 }
     
-function postFetchActivity(title, description, category_id) {
-    // console.log(title, description, category_id);
-    const activityFormData = {title, description, category_id}
-    fetch(endFetchPoint, {
-        method: "POST", 
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(activityFormData)
-        })
-        .then(response => response.json())
-        .then(activity => {
-            //  const activityData = activity.data
-            let updatedActivity = new Activity(activity.id, activitiesAttributes)
-
-            document.querySelector('#activities_container').innerHTML += updatedActivity.renderActivities();
-          
-    })
     
-}
+
 
 
