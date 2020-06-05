@@ -19,6 +19,7 @@ class Activity {
                 <p><strong>Description:</strong> ${this.description}</p>
                 <p><strong>Category:</strong> ${this.category.category_name}</p>
                 <button data-id=${this.id}> Edit </button>
+                <button data-id=${this.id}> Delete </button>
             </div>
             <br><br>`;
     }
