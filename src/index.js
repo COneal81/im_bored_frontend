@@ -88,9 +88,9 @@ function postFetchActivity(title, description, category_id) {
         .then(response => response.json())
         .then(activity => {
             //  const activityData = activity.data
-            let newActivity = new Activity(id, activitiesAttributes)
+            let updatedActivity = new Activity(activity.id, activitiesAttributes)
 
-            document.querySelector('#activities_container').innerHTML += newActivity.renderActivities();
+            document.querySelector('#activities_container').innerHTML += updatedActivity.renderActivities();
           
     })
     
