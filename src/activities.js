@@ -9,7 +9,6 @@ class Activity {
         // debugger
     }
 
-
     // function key word decloration is not needed in classes
     renderActivities() {
         //  debugger
@@ -18,18 +17,15 @@ class Activity {
                 <h2> ${this.title}</h2>
                 <p><strong>Description:</strong> ${this.description}</p>
                 <p><strong>Category:</strong> ${this.category.category_name}</p>
-                <button data-id=${this.id}> Edit </button>
-                <button data-id=${this.id}> Delete </button>
+                <button id="edit-button" data-id=${this.id}> Edit </button> &nbsp &nbsp
             </div>
             <br><br>`;
     }
 
-    
     static findById(id) {
         //   debugger
         return this.all.find(activity => activity.id == id);
     }
-
 
     renderActivityUpdateForm() {
         //  debugger
@@ -50,7 +46,7 @@ class Activity {
             <option value="1">Winter</option>
             <option value="2">Spring</option>
             <option value="3">Summer</option>
-            <option value="4">Winter</option>
+            <option value="4">Fall</option>
             <option value="5">Indoor</option>
             <option value="6">Outdoor</option>
         </select>
