@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const activity = Activity.findById(id);
         // debugger
        
-        document.querySelector("#update-activity").innerHTML = activity.renderActivityUpdateForm();
+        document.querySelector("#update-activity").innerHTML += activity.renderActivityUpdateForm();
     });
      document.querySelector('#update-activity').addEventListener('submit', e => updateActivityFormHandler(e))
 })
@@ -61,8 +61,6 @@ function postFetchActivity(title, description, category_id) {
             document.querySelector('#activities_container').innerHTML += updatedActivity.renderActivities();
           
     })
-    
-    
 }
 
 function updateActivityFormHandler(e) {
@@ -87,7 +85,6 @@ function patchFetchActivity(activity, title, description, category_id){
         },
         body: JSON.stringify(bodyJSONData),
     })
-    
     .then(response => response.json())
     .then(activity => {
         const updateActivity = new Activity(activity.data.id, activity.data.attributes)

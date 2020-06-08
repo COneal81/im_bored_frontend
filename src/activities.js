@@ -25,7 +25,6 @@ class Activity {
 
     
     static findById(id) {
-        //   debugger
         return this.all.find(activity => activity.id == id);
     }
 
