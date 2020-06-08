@@ -15,8 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // debugger
        
         document.querySelector("#update-activity").innerHTML += activity.renderActivityUpdateForm();
-    });
+    
      document.querySelector('#update-activity').addEventListener('submit', e => updateActivityFormHandler(e))
+    });
 })
 
 
