@@ -64,3 +64,19 @@ p {
     color: #050505;
     
 }
+
+textarea {
+    max-width: 90%
+}
+
+input {
+    max-width: 90%
+}
+
+#create-button {
+    max-width: 90%
+}
+
+select {
+    max-width: 90%
+}
