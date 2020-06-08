@@ -1,4 +1,4 @@
-
+/* CSS for Overall Site */
 * {
     font-family:'Courier New', Courier, monospace;
     color: #050505;
@@ -7,25 +7,31 @@
 html,
 body {
     height: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
+
 body {
-    
-    
     width: 100%;
     margin: 0 auto;
     background: #f3f8fd;
     background: -webkit-linear-gradient(#f3f8fd, #a9e4f3);
-    background-attachment: fixed
-}
-
-/* div {
-    text-align: center
-} */
-
-h2 {
+    background-attachment: fixed;
     
 }
+
+/* Responsive CSS */
+@media screen and (max-width: 786px) {
+    .left,
+    .main,
+    .right {
+        width: 100%;
+    }
+}
+
+
+/* CSS for containers and individual tags */
 .activity-form-container {
     border: 1px solid rgb(3, 18, 85);
     text-align: center
@@ -42,14 +48,17 @@ h2 {
     text-align: left
 }
 
+
 p {
     font-display: bold
     }
+
 
 #update-activity{
  border: 1px solid rgb(3, 18, 85);
  text-align: center
 }
+
 
 #activities_container{
     color: #050505;
