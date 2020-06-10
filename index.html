@@ -13,45 +13,46 @@
         <link rel="stylesheet" href='styles/stylesheet.css'>
         <script type="text/javascript" src="src/activities.js"></script>
         <script type="text/javascript" src="src/index.js"></script>
-        
     </head>
 
 
+
     <body>
-            
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <h1>Mom, I'm Bored... </h1>
             <h4>...where moms can find activities for their kids!!!!</h4><br></br>
             <div class="activity-form-container">
-                    <form id="create-activity-form" style="">
+                <form id="create-activity-form" style="">
                 <h3>Add an activity</h3>
-               <label for="title"><strong>Activity Name:</strong></strong></label>
-               <input id="input-title" type="text" name="title" value ="" placeholder="Activity Name..."><br><br>
-            
-               <label for="description"><strong>Description:</strong></label>
-               <textarea id="input-description" name="description" rows="2" cols="55"
-                   value="" placeholder="Describe activity..." name="" id="" ></textarea><br><br>
+                    <label for="title"><strong>Activity Name:</strong></strong></label>
+                    <input id="input-title" type="text" name="title" value ="" placeholder="Activity Name...">
+                    <br><br>
+                    
+                    <label for="description"><strong>Description:</strong></label>
+                    <textarea id="input-description" name="description" rows="2" cols="55" value="" placeholder="Describe activity..." name="" id="" ></textarea>
+                    <br><br>
 
-               <h5><strong>Select Category</strong> </h5>
-               <select id="categories" name="categories">
-                   
-                  </select>
-                  <br><br>
+                    <h5><strong>Select Category</strong> </h5>
+                    <select id="categories" name="categories"></select>
+                    <br><br>
                
-                <input id= "create-button" type="submit" name="submit" value="Create Activity"><br><br>
+                    <input id= "create-button" type="submit" name="submit" value="Create Activity"><br><br>
                 
-            </form>
-        </div>
-        <br><br>
-        <div id="update-activity"></div>
-        <br><br><br>
-        <h2><center>~~ Activities List ~~</center></h2>
-        <br>
-        <div id="activities_container">         
-        </div>      
-        <br><br>
+                </form>
+            </div>
+            <br><br>
+
+            <div id="update-activity"></div>
+            <br><br><br>
+
+            <h2><center>~~ Activities List ~~</center></h2>
+            <br>
+
+            <div id="activities_container"></div>      
+            <br><br>
+
     </body>
 
 </html>

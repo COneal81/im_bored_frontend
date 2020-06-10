@@ -2,6 +2,7 @@ const endFetchPoint = "http://localhost:3000/api/v1/activities"
 const categoryEndPoint = "http://localhost:3000/api/v1/categories"
 
 
+
 document.addEventListener('DOMContentLoaded', () => {
       // fetch and load Activities
     getActivities()
@@ -17,17 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
         //  debugger
         const activity = Activity.findById(id);
         // debugger
-       
         document.querySelector("#update-activity").innerHTML += activity.renderActivityUpdateForm();
-    
-     document.querySelector('#update-activity').addEventListener('submit', e => updateActivityFormHandler(e))
+        document.querySelector('#update-activity').addEventListener('submit', e => updateActivityFormHandler(e))
     });
 })
 
 
 
 // This from handler is what grabs all of that value from the submitting of a form.
-
 function getActivities() {
     fetch(endFetchPoint)
     .then(response => response.json())
@@ -35,12 +33,11 @@ function getActivities() {
         activities.data.forEach(activities => {
             // debugger
             let newActivity = new Activity(activities.id, activities.attributes)
-
             document.querySelector("#activities_container").innerHTML += newActivity.renderActivities()
-           
         })
     })    
 }
+
 
 
 function createFormHandler(e) {
@@ -50,6 +47,8 @@ function createFormHandler(e) {
     const categoryId = parseInt(document.querySelector("#categories").value)
     postFetchActivity(titleInput, descriptionInput, categoryId)
 }
+
+
 
 function postFetchActivity(title, description, category_id) {
     // console.log(title, description, category_id);
@@ -63,11 +62,12 @@ function postFetchActivity(title, description, category_id) {
         .then(activity => {
         //    debugger
             const updatedActivity = new Activity(activity.id, activity.data.attributes)
-
             document.querySelector('#activities_container').innerHTML += updatedActivity.renderActivities();
           
     })
 }
+
+
 
 function updateActivityFormHandler(e) {
     e.preventDefault();
@@ -79,6 +79,7 @@ function updateActivityFormHandler(e) {
 //    debugger
     patchFetchActivity(activity, title, description, category_id)
 }
+
 
 
 function patchFetchActivity(activity, title, description, category_id){
@@ -98,6 +99,8 @@ function patchFetchActivity(activity, title, description, category_id){
      });
 }
     
+
+
 function categotySelection() {
    fetch(categoryEndPoint)
    .then(response => response.json())
@@ -109,11 +112,8 @@ function categotySelection() {
         option.setAttribute('value', category.id);
         option.innerHTML = category.attributes.category_name;
         categorySelection.appendChild(option)
-       })
-       
-       
-   })
-   
+       })    
+   })  
 }
     
 
