@@ -1,8 +1,12 @@
 const endFetchPoint = "http://localhost:3000/api/v1/activities"
+const categoryEndPoint = "http://localhost:3000/api/v1/categories"
+
 
 document.addEventListener('DOMContentLoaded', () => {
       // fetch and load Activities
     getActivities()
+    categotySelection()
+   
     // listen for a submit event from the form and handle the data beig passed in
     const createActivityForm = document.querySelector('#create-activity-form')
     createActivityForm.addEventListener("submit", (e) => createFormHandler(e))
@@ -33,6 +37,7 @@ function getActivities() {
             let newActivity = new Activity(activities.id, activities.attributes)
 
             document.querySelector("#activities_container").innerHTML += newActivity.renderActivities()
+           
         })
     })    
 }
@@ -71,7 +76,7 @@ function updateActivityFormHandler(e) {
     const title = e.target.querySelector("#input-title").value
     const description= e.target.querySelector("#input-description").value
     const category_id = parseInt(e.target.querySelector("#categories").value)
-    //  debugger
+//    debugger
     patchFetchActivity(activity, title, description, category_id)
 }
 
@@ -89,10 +94,27 @@ function patchFetchActivity(activity, title, description, category_id){
     .then(response => response.json())
     .then(activity => {
         const updateActivity = new Activity(activity.data.id, activity.data.attributes)
-     document.querySelector('#activities_container').innerHTML += updateActivity.renderActivities()
+        document.querySelector('#activities_container').innerHTML += updateActivity.renderActivities()
      });
 }
     
+function categotySelection() {
+   fetch(categoryEndPoint)
+   .then(response => response.json())
+   .then(categories => {
+       let categorySelection = document.querySelector('#categories');
+       categories.data.forEach(category => {
+        let option = document.createElement('option');
+        option.setAttribute('text', category.attributes.category_name);
+        option.setAttribute('value', category.id);
+        option.innerHTML = category.attributes.category_name;
+        categorySelection.appendChild(option)
+       })
+       
+       
+   })
+   
+}
     
 
 
