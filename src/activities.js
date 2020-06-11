@@ -11,6 +11,12 @@ class Activity {
 
 
 
+    static findById(id) {
+        return this.all.find(activity => activity.id == id);
+    }
+
+   
+
     // function key word decloration is not needed in classes
     renderActivities() {
         //  debugger
@@ -26,12 +32,6 @@ class Activity {
 
     
 
-    static findById(id) {
-        return this.all.find(activity => activity.id == id);
-    }
-
-
-
     renderActivityUpdateForm() {
         //  debugger
         return `
@@ -46,14 +46,15 @@ class Activity {
                 <textarea id="input-description" name="description" rows="2" cols="55" value="">${this.description} </textarea>
                 <br><br>
                 
-                <label> <strong>Select a Category </strong></label>
+
+                <h5> <strong>Select a Category </strong><h5>
                 <select id='categories' name='categories' value='${this.category.category_name}'>
-                    <option value="1">Winter</option>
-                    <option value="2">Spring</option>
-                    <option value="3">Summer</option>
-                    <option value="4">Winter</option>
-                    <option value="5">Indoor</option>
-                    <option value="6">Outdoor</option>
+                <option value="1">Winter</option>
+                <option value="2">Spring</option>
+                <option value="3">Summer</option>
+                <option value="4">Winter</option>
+                <option value="5">Indoor</option>
+                <option value="6">Outdoor</option>
                 </select>
                 <br><br>
                 
