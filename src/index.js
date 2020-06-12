@@ -9,18 +9,26 @@ document.addEventListener('DOMContentLoaded', () => {
     categorySelection()
    
     // listen for a submit event from the form and handle the data beig passed in
+    
     const createActivityForm = document.querySelector('#create-activity-form')
     createActivityForm.addEventListener("submit", (e) => createFormHandler(e))
-
+    
     const editButtonActivitiesContainer = document.querySelector('#activities_container')
+    
     editButtonActivitiesContainer.addEventListener('click', e => {
+        
+        // debugger
         const id = parseInt(e.target.dataset.id);
         //  debugger
         const activity = Activity.findById(id);
+       
         // debugger
         document.querySelector("#update-activity").innerHTML += activity.renderActivityUpdateForm();
         document.querySelector('#update-activity').addEventListener('submit', e => updateActivityFormHandler(e))
     });
+
+    const allActivitiesButton = document.querySelector('#all-activities')
+    allActivitiesButton.addEventListener('click', getActivities())
 })
 
 
@@ -48,6 +56,8 @@ function categorySelection() {
          let option = document.createElement('option');
          option.setAttribute('text', category.attributes.category_name);
          option.setAttribute('value', category.id);
+         //option.setAttribute('selected', "selected");
+
          option.innerHTML = category.attributes.category_name;
          categorySelection.appendChild(option)
         })    
@@ -108,10 +118,21 @@ function patchFetchActivity(activity, title, description, category_id){
         body: JSON.stringify(bodyJSONData),
     })
     .then(response => response.json())
-    .then(activity => {
-        const updateActivity = new Activity(activity.data.id, activity.data.attributes)
-        
-        document.querySelector('#activities_container').innerHTML += updateActivity.renderActivities()
+    // .then(activity => {
+    //     debugger
+    //     const updateActivity = new Activity(activity.data.id, activity.data.attributes)
+    //     debugger
+    //     document.querySelector('#activities_container').innerHTML += updateActivity.renderActivities()
+    //  });
+
+    .then(updatedActivityJSON => {
+    //   debugger
+        const updatedAct = Activity.updateActivity(updatedActivityJSON)
+       
+    // debugger
+        activityInfo = document.querySelector('#activities_container')
+        activityInfo.innerHTML = updatedAct.renderActivities()
+
      });
 }
     
