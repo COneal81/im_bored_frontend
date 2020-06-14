@@ -2,36 +2,30 @@ const endFetchPoint = "http://localhost:3000/api/v1/activities"
 const categoryEndPoint = "http://localhost:3000/api/v1/categories"
 
 
-
+// Load the DOM and Event Listners
 document.addEventListener('DOMContentLoaded', () => {
-      // fetch and load Activities
+      // fetch and load Activities and Categories
     getActivities()
     categorySelection()
    
     // listen for a submit event from the form and handle the data beig passed in
-    
     const createActivityForm = document.querySelector('#create-activity-form')
     createActivityForm.addEventListener("submit", (e) => createFormHandler(e))
     
+
     const editButtonActivitiesContainer = document.querySelector('#activities_container')
-    
     editButtonActivitiesContainer.addEventListener('click', e => {
-        
-        // debugger
         const id = parseInt(e.target.dataset.id);
-        //  debugger
         const activity = Activity.findById(id);
-       
-        // debugger
         document.querySelector("#update-activity").innerHTML += activity.renderActivityUpdateForm();
+        
         document.querySelector('#update-activity').addEventListener('submit', e => updateActivityFormHandler(e))
     });
-
-    const allActivitiesButton = document.querySelector('#all-activities')
-    allActivitiesButton.addEventListener('click', getActivities())
 })
 
 
+
+// READ 
 // This from handler is what grabs all of that value from the submitting of a form.
 function getActivities() {
     fetch(endFetchPoint)
@@ -46,7 +40,6 @@ function getActivities() {
 }
 
 
-
 function categorySelection() {
     fetch(categoryEndPoint)
     .then(response => response.json())
@@ -56,8 +49,6 @@ function categorySelection() {
          let option = document.createElement('option');
          option.setAttribute('text', category.attributes.category_name);
          option.setAttribute('value', category.id);
-         //option.setAttribute('selected', "selected");
-
          option.innerHTML = category.attributes.category_name;
          categorySelection.appendChild(option)
         })    
@@ -66,6 +57,7 @@ function categorySelection() {
 
 
 
+// CREATE 
 function createFormHandler(e) {
     e.preventDefault()
     const titleInput = document.querySelector("#input-title").value
@@ -75,9 +67,7 @@ function createFormHandler(e) {
 }
 
 
-
 function postFetchActivity(title, description, category_id) {
-    // console.log(title, description, category_id);
     const activityFormData = {title, description, category_id}
     fetch(endFetchPoint, {
         method: "POST", 
@@ -88,21 +78,35 @@ function postFetchActivity(title, description, category_id) {
         .then(activity => {
             const newActivity = new Activity(activity.id, activity.data.attributes)
             document.querySelector('#activities_container').innerHTML += newActivity.renderActivities()
-      
     })
 }
 
 
+// UPDATE
+function updateCategorySelection() {
+    fetch(categoryEndPoint)
+           .then(response => response.json())
+           .then(categories => {
+               let categorySelection = document.querySelector('#update-categories')
+               categories.data.forEach(category => {
+                let option = document.createElement('option');
+                option.setAttribute('text', category.attributes.category_name);
+                option.setAttribute('value', category.id);
+                option.innerHTML = category.attributes.category_name;
+                categorySelection.appendChild(option)
+               })    
+           })
+       }  
 
+       
 function updateActivityFormHandler(e) {
     e.preventDefault();
     const id = parseInt(e.target.dataset.id);
     const activity = Activity.findById(id);
     const title = e.target.querySelector("#input-title").value
     const description= e.target.querySelector("#input-description").value
-    const category_id = parseInt(e.target.querySelector("#categories").value)
-//    debugger
-    patchFetchActivity(activity, title, description, category_id)
+    const category = parseInt(e.target.querySelector("#update-categories").value)
+    patchFetchActivity(activity, title, description, category)
 }
 
 
@@ -118,21 +122,10 @@ function patchFetchActivity(activity, title, description, category_id){
         body: JSON.stringify(bodyJSONData),
     })
     .then(response => response.json())
-    // .then(activity => {
-    //     debugger
-    //     const updateActivity = new Activity(activity.data.id, activity.data.attributes)
-    //     debugger
-    //     document.querySelector('#activities_container').innerHTML += updateActivity.renderActivities()
-    //  });
-
     .then(updatedActivityJSON => {
-    //   debugger
         const updatedAct = Activity.updateActivity(updatedActivityJSON)
-       
-    // debugger
         activityInfo = document.querySelector('#activities_container')
         activityInfo.innerHTML = updatedAct.renderActivities()
-
      });
 }
     

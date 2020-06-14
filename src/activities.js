@@ -4,16 +4,13 @@ class Activity {
         return this.all.find(activity => activity.id == id);
     }
 
-   
 
     static updateActivity(updatedActivityData) {
         const activityToUpdate = this.findById(updatedActivityData.data.id)
         activityToUpdate.title = updatedActivityData.data.attributes.title
         activityToUpdate.description = updatedActivityData.data.attributes.description
         activityToUpdate.category = updatedActivityData.data.attributes.category
-    // debugger
         return activityToUpdate
-       
     }
 
 
@@ -22,21 +19,12 @@ class Activity {
         this.title = activitiesAttributes.title;
         this.description = activitiesAttributes.description;
         this.category = activitiesAttributes.category;
-        // push all new instances into the Activity array
         Activity.all.push(this)
-        // debugger
     }
 
 
-
-   
-
-    
-
     // function key word decloration is not needed in classes
     renderActivities() {
-        
-        //  debugger
         return `
             <div data-id= ${this.id}>
                 <h2> ${this.title}</h2>
@@ -48,12 +36,10 @@ class Activity {
             <br><br>`;
     }
 
-
+    
 
     renderActivityUpdateForm() {
-  
-        //  debugger
-        
+        updateCategorySelection()
         return `
             <form data-id=${this.id}>
             <h4> Update Activity </h4>
@@ -68,13 +54,8 @@ class Activity {
                 
             
                 <h5> <strong>Select a Category </strong><h5>
-                <select id='categories' name='categories' value='${this.category.category_name}'>
-                <option value="1">Winter</option>
-                <option value="2">Spring</option>
-                <option value="3">Summer</option>
-                <option value="4">Fall</option>
-                <option value="5">Indoor</option>
-                <option value="6">Outdoor</option>
+                <select id='update-categories' name='update-categories' value='${this.category.category_name}'>
+                
                 </select>
                 <br><br>
                 
@@ -84,5 +65,6 @@ class Activity {
        `;
     }
 }
+
 // Needs to be outside of the class so it has a global scope.
 Activity.all = [];
