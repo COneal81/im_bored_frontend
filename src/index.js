@@ -77,7 +77,11 @@ function postFetchActivity(title, description, category_id) {
         .then(response => response.json())
         .then(activity => {
             const newActivity = new Activity(activity.id, activity.data.attributes)
-            document.querySelector('#activities_container').innerHTML += newActivity.renderActivities()
+            // document.querySelector('#activities_container').innerHTML += newActivity.renderActivities()
+            var el  = document.querySelector('#activities_container')
+            elChild = document.createElement('div');
+            elChild.innerHTML = newActivity.renderActivities()
+            el.insertBefore(elChild, el.firstChild)
     })
 }
 
