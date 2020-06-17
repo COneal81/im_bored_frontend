@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const editButtonActivitiesContainer = document.querySelector('#activities_container')
     editButtonActivitiesContainer.addEventListener('click', e => {
         const id = parseInt(e.target.dataset.id);
+        // debugger
         const activity = Activity.findById(id);
+    
         document.querySelector("#update-activity").innerHTML += activity.renderActivityUpdateForm();
         
         document.querySelector('#update-activity').addEventListener('submit', e => updateActivityFormHandler(e))
@@ -76,9 +78,10 @@ function postFetchActivity(title, description, category_id) {
         })
         .then(response => response.json())
         .then(activity => {
-            const newActivity = new Activity(activity.id, activity.data.attributes)
+            // debugger
+            const newActivity = new Activity(activity.data.id, activity.data.attributes)
             // document.querySelector('#activities_container').innerHTML += newActivity.renderActivities()
-            var el  = document.querySelector('#activities_container')
+            let el  = document.querySelector('#activities_container')
             elChild = document.createElement('div');
             elChild.innerHTML = newActivity.renderActivities()
             el.insertBefore(elChild, el.firstChild)
@@ -98,7 +101,7 @@ function updateCategorySelection() {
                 option.setAttribute('value', category.id);
                 option.innerHTML = category.attributes.category_name;
                 categorySelection.appendChild(option)
-               })    
+               })  
            })
        }  
 
@@ -106,6 +109,7 @@ function updateCategorySelection() {
 function updateActivityFormHandler(e) {
     e.preventDefault();
     const id = parseInt(e.target.dataset.id);
+    // debugger
     const activity = Activity.findById(id);
     const title = e.target.querySelector("#input-title").value
     const description= e.target.querySelector("#input-description").value
@@ -127,9 +131,12 @@ function patchFetchActivity(activity, title, description, category_id){
     })
     .then(response => response.json())
     .then(updatedActivityJSON => {
+        console.log(updatedActivityJSON)
         const updatedAct = Activity.updateActivity(updatedActivityJSON)
-        activityInfo = document.querySelector('#activities_container')
+        const activityInfo = document.querySelector('#activities_container')
+        // const activityInfo = document.querySelector('activities_container.div input[data-id = "${activity.id}"]')
         activityInfo.innerHTML = updatedAct.renderActivities()
+
      });
 }
     

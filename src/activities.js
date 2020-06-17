@@ -7,10 +7,13 @@ class Activity {
 
     static updateActivity(updatedActivityData) {
         const activityToUpdate = this.findById(updatedActivityData.data.id)
+        // debugger
         activityToUpdate.title = updatedActivityData.data.attributes.title
         activityToUpdate.description = updatedActivityData.data.attributes.description
         activityToUpdate.category = updatedActivityData.data.attributes.category
+    // debugger
         return activityToUpdate
+    
     }
 
 
@@ -40,6 +43,7 @@ class Activity {
 
     renderActivityUpdateForm() {
         updateCategorySelection()
+        // debugger
         return `
             <form data-id=${this.id}>
             <h4> Update Activity </h4>
@@ -54,7 +58,7 @@ class Activity {
                 
             
                 <h5> <strong>Select a Category </strong><h5>
-                <select id='update-categories' name='update-categories' value='${this.category.category_name}'>
+                <select id='update-categories' name='update-categories' value="${this.category.id}">
                 
                 </select>
                 <br><br>
