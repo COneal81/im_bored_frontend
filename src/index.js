@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const id = parseInt(e.target.dataset.id);
         // debugger
         const activity = Activity.findById(id);
-    
+        
         document.querySelector("#update-activity").innerHTML += activity.renderActivityUpdateForm();
         
         document.querySelector('#update-activity').addEventListener('submit', e => updateActivityFormHandler(e))
@@ -131,12 +131,17 @@ function patchFetchActivity(activity, title, description, category_id){
     })
     .then(response => response.json())
     .then(updatedActivityJSON => {
-        console.log(updatedActivityJSON)
         const updatedAct = Activity.updateActivity(updatedActivityJSON)
-        const activityInfo = document.querySelector('#activities_container')
-        // const activityInfo = document.querySelector('activities_container.div input[data-id = "${activity.id}"]')
-        activityInfo.innerHTML = updatedAct.renderActivities()
+   
+        // Line 138 renders only the activity that was updated, but removes the other activities 
+        // from the Activities List/activity_container.
+        // const activityInfo = document.querySelector('#activities_container')
 
+        // Line 142 renders the updated activity in the same box as the edit form is in.  It leaves the 
+        // rest of the activities below and does not update the edited activity in the Activity List/activity_container.
+        const activityInfo = document.querySelector(`[data-id='${activity.id}']`)
+        activityInfo.innerHTML = updatedAct.renderActivities() 
+      
      });
 }
     
