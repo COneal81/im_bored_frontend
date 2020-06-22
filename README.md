@@ -4,13 +4,13 @@ This is a portfolio project for the Javascript/Rails API section of the Flatiron
 
 Getting Started
 
-1. Clone the backend repo and then install the needed gems: $ bundle install
+1. Clone the backend repo at git@github.com:COneal81/im_bored_backend.git and then install the needed gems: $ bundle install
 
 2. CD into the directory.
 
 3. Migrate the database: $ rake db:migrate
 
-4. Clone the backend repo at git@github.com:COneal81/im_bored_backend.git
+4. Clone the frontend repo at https://github.com/COneal81/im_bored_frontend.git
 
 5. CD into the directory.
 
