@@ -16,11 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const editButtonActivitiesContainer = document.querySelector('#activities_container')
     editButtonActivitiesContainer.addEventListener('click', e => {
         const id = parseInt(e.target.dataset.id);
-        // debugger
         const activity = Activity.findById(id);
-        
         document.querySelector("#update-activity").innerHTML += activity.renderActivityUpdateForm();
-        
         document.querySelector('#update-activity').addEventListener('submit', e => updateActivityFormHandler(e))
     });
 })
@@ -28,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // READ 
-// This from handler is what grabs all of that value from the submitting of a form.
 function getActivities() {
     fetch(endFetchPoint)
     .then(response => response.json())
@@ -78,9 +74,7 @@ function postFetchActivity(title, description, category_id) {
         })
         .then(response => response.json())
         .then(activity => {
-            // debugger
             const newActivity = new Activity(activity.data.id, activity.data.attributes)
-            // document.querySelector('#activities_container').innerHTML += newActivity.renderActivities()
             let el  = document.querySelector('#activities_container')
             elChild = document.createElement('div');
             elChild.innerHTML = newActivity.renderActivities()
@@ -118,7 +112,6 @@ function updateActivityFormHandler(e) {
 }
 
 
-
 function patchFetchActivity(activity, title, description, category_id){
     const bodyJSONData = {title, description, category_id}
     fetch(`http://localhost:3000/api/v1/activities/${activity.id}`, {
@@ -132,16 +125,11 @@ function patchFetchActivity(activity, title, description, category_id){
     .then(response => response.json())
     .then(updatedActivityJSON => {
         const updatedAct = Activity.updateActivity(updatedActivityJSON)
-   
-        // Line 138 renders only the activity that was updated, but removes the other activities 
-        // from the Activities List/activity_container.
-        // const activityInfo = document.querySelector('#activities_container')
-
-        // Line 142 renders the updated activity in the same box as the edit form is in.  It leaves the 
-        // rest of the activities below and does not update the edited activity in the Activity List/activity_container.
-        const activityInfo = document.querySelector(`[data-id='${activity.id}']`)
+        const container = document.querySelector("#activities_container")
+        const activityInfo = container.querySelector(`[data-id='${activity.id}']`)
+        
         activityInfo.innerHTML = updatedAct.renderActivities() 
-      
+        alert(`${updatedAct.title} has been updated`)
      });
 }
     

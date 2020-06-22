@@ -7,13 +7,10 @@ class Activity {
 
     static updateActivity(updatedActivityData) {
         const activityToUpdate = this.findById(updatedActivityData.data.id)
-        // debugger
         activityToUpdate.title = updatedActivityData.data.attributes.title
         activityToUpdate.description = updatedActivityData.data.attributes.description
         activityToUpdate.category = updatedActivityData.data.attributes.category
-    // debugger
         return activityToUpdate
-    
     }
 
 
@@ -26,24 +23,20 @@ class Activity {
     }
 
 
-    // function key word decloration is not needed in classes
     renderActivities() {
         return `
             <div data-id= ${this.id}>
                 <h2> ${this.title}</h2>
                 <p><strong>Description:</strong> ${this.description}</p>
                 <p><strong>Category:</strong> ${this.category.category_name}</p>
-
                 <button data-id=${this.id}> Edit </button>
             </div>
             <br><br>`;
     }
 
-    
 
     renderActivityUpdateForm() {
         updateCategorySelection()
-        // debugger
         return `
             <form data-id=${this.id}>
             <h4> Update Activity </h4>
@@ -56,7 +49,6 @@ class Activity {
                 <textarea id="input-description" name="description" rows="2" cols="55" value="">${this.description} </textarea>
                 <br><br>
                 
-            
                 <h5> <strong>Select a Category </strong><h5>
                 <select id='update-categories' name='update-categories' value="${this.category.id}">
                 
