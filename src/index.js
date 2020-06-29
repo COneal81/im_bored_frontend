@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // listen for a submit event from the form and handle the data beig passed in
     const createActivityForm = document.querySelector('#create-activity-form')
     createActivityForm.addEventListener("submit", (e) => createFormHandler(e))
-    
+
 
     const editButtonActivitiesContainer = document.querySelector('#activities_container')
     editButtonActivitiesContainer.addEventListener('click', e => {
@@ -20,8 +20,22 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector("#update-activity").innerHTML += activity.renderActivityUpdateForm();
         document.querySelector('#update-activity').addEventListener('submit', e => updateActivityFormHandler(e))
     });
-})
 
+
+    const sortActities = document.querySelector('#sort-button')
+    sortActities.addEventListener("click", (e) => getSortedActivites(e))
+
+
+    const activitiesList = document.querySelector('#all-activities-button')
+    activitiesList.addEventListener("click", (e) => {
+        let div = document.getElementById('activities_container');
+        while(div.firstChild){
+            div.removeChild(div.firstChild);
+        }
+        getActivities()
+    })
+})
+    
 
 
 // READ 
@@ -30,11 +44,39 @@ function getActivities() {
     .then(response => response.json())
     .then(activities => {
         activities.data.forEach(activities => {
-            // debugger
             let allActivities = new Activity(activities.id, activities.attributes)
             document.querySelector("#activities_container").innerHTML += allActivities.renderActivities()
         })
     })    
+}
+
+function getSortedActivites(e) {
+    let div = document.getElementById('activities_container');
+while(div.firstChild){
+    div.removeChild(div.firstChild);
+}
+        // debugger
+    fetch(endFetchPoint)
+    .then(response => response.json())
+    .then(activities => {
+
+        const sortAct = activities.data.sort(function(a, b) {
+            let nameA = a.attributes.title.toUpperCase(); 
+            let nameB = b.attributes.title.toUpperCase(); 
+            if (nameA < nameB) { 
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+            // the above if's sort some of the data to the left and some to the right.  the last line returns the array where the names must be equal and cannot be changed.
+            return 0;
+            })
+            sortAct.forEach(activity => { 
+                let sortedActivities = new Activity(activity.id, activity.attributes)   
+                document.querySelector("#activities_container").innerHTML += sortedActivities.renderActivities()
+          })
+    })
 }
 
 
@@ -74,6 +116,7 @@ function postFetchActivity(title, description, category_id) {
         })
         .then(response => response.json())
         .then(activity => {
+           console.table(activity)
             const newActivity = new Activity(activity.data.id, activity.data.attributes)
             let el  = document.querySelector('#activities_container')
             elChild = document.createElement('div');
